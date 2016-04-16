@@ -1,0 +1,153 @@
+% Copyright 2016 Jacques Supcik / Passeport Vacances Fribourg
+%
+% Licensed under the Apache License, Version 2.0 (the "License");
+% you may not use this file except in compliance with the License.
+% You may obtain a copy of the License at
+%
+%     http://www.apache.org/licenses/LICENSE-2.0
+%
+% Unless required by applicable law or agreed to in writing, software
+% distributed under the License is distributed on an "AS IS" BASIS,
+% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+% See the License for the specific language governing permissions and
+% limitations under the License.
+%
+\documentclass [parskip=full, paper=a4paper]{scrbook}
+\usepackage[nohead, textwidth=16.5cm, textheight=23.5cm, ignorehead, paper=a4paper]{geometry}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage[french]{babel}
+\usepackage{hyperref}
+\usepackage{tikz}
+%\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage{tabulary}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{etoolbox}
+
+\AtBeginDocument{\def\labelitemi{$\bullet$}}
+
+\setmainfont{Alegreya Sans}
+\setkomafont{disposition}{\normalfont}
+% \setcounter{tocdepth}{1}
+
+\renewcommand{\leftmark}{}
+\renewcommand{\rightmark}{}
+
+\hypersetup{
+    pdftitle={Passeport vacances Fribourg 2016},
+    pdfauthor={Jacques Supcik},
+    bookmarks=true,
+}
+
+\begin{document}
+\frontmatter
+\begin{titlepage}
+\begin{center}
+{\fontsize{45}{40}\selectfont{}39\ieme{} Passeport vacances\\
+\vspace*{3mm}
+Fribourg/Freiburg 2016}
+\vfill
+\includegraphics[width=.7\textwidth]{logo.jpg}
+\vfill
+{\fontsize{32}{32}\selectfont{}du 11 juillet au 7 août 2016}\\
+\vspace*{3mm}
+{\fontsize{32}{32}\selectfont{}vom 11. Juli bis 7. August 2016}
+
+\end{center}
+\end{titlepage}
+\cleardoublepage
+\tableofcontents
+\cleardoublepage
+
+\mainmatter
+
+\part{Informations générales}
+\input{intro}
+
+\part{Activités}
+((* for cat in data *))
+\chapter{(((cat["category"]|escape_tex)))}
+
+((* for act in cat["activities"] *))
+((* if params["onepage"] *))\newpage((* endif *))
+\begin{minipage}[t]{\textwidth}%
+\section{(((act["titre"]|escape_tex)))}
+
+(((act["information"]|escape_tex)))
+\medskip
+
+\begin{tabulary}{0.9\textwidth}{p{2.5cm}|L}
+%Catégorie & (((cat["category"]|escape_tex))) \\
+
+((* if act["attr"]["Rendez-vous"] *))
+Rendez-vous & (((act["attr"]["Rendez-vous"]["c_value"]|escape_tex|cell_break))) \\
+((* endif *))
+
+((* if act["attr"]["Bus TPF"] *))
+Bus TPF & (((act["attr"]["Bus TPF"]["c_value"]|escape_tex|cell_break))) \\
+((* endif *))
+
+((* if act["uattr"]["attribute_5"] *))
+Age & (((act["uattr"]["attribute_5"]["a_value"]|escape_tex))) ans \\
+((* else *))
+Age & 7 - 16 ans \\
+((* endif *))
+
+\end{tabulary}
+
+((* if act["attr"]["Important"] *))
+\medskip
+\textbf{Important: (((act["attr"]["Important"]["c_value"]|escape_tex|line_break)))}
+
+((* endif *))
+
+# set groups = []
+# for g in act["groups"]
+#   set periods = []
+#   for p in g["periods"]
+#     do periods.append(p["label"]|lower)
+#   endfor
+#   set min_q = 0
+#   if g["attr"]["Nombre minimum souhaité"]
+#     set min_q = g["attr"]["Nombre minimum souhaité"]["c_value"]|int
+#   endif
+#   set max_q = g["maxQuota"]|int
+#   if min_q > 0 and max_q > 0
+#     set age = " (minimum " + min_q|string + ", maximum " + max_q|string + " enfants)"
+#   elif max_q > 0
+#     set age = " (maximum " + max_q|string + " enfants)"
+#   elif min_q > 0
+#     set age = " (minimum " + min_q|string + " enfants)"
+#   else
+#     set age = ""
+#   endif
+#   if g["attr"]["Horaire"]
+#     do groups.append(periods|join(" + ") + " : " + g["attr"]["Horaire"]["c_value"] + age)
+#   else
+##    do groups.append(periods|join(" + ") + age)
+#   endif
+# endfor
+
+((* if groups|count > 0 *))
+\medskip
+
+\textbf{Dates / Heures}
+\medskip
+
+\begin{itemize}[noitemsep]
+((* for g in groups *))
+\item ((( g|escape_tex )))
+((* endfor *))
+\end{itemize}
+((* endif *))
+\end{minipage}
+((* endfor *))
+
+
+((* endfor *))
+
+\end{document}
