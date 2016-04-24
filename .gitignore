@@ -3,3 +3,6 @@ dump activités.xls
 preview.pdf
 preview.tex
 config.cfg
+temp
+venv
+__*
