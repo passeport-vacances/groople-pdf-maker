@@ -1,2 +1,5 @@
 main.*
 *.svg
+*.log
+template.pdf
+*.synctex.gz
