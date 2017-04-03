@@ -15,5 +15,5 @@ test-docker.sh
 *.out
 *.toc
 doc_src/2016
-pvfr_bat.pdf
-pvfr.pdf
+doc_src/pvfr_bat.pdf
+doc_src/pvfr.pdf

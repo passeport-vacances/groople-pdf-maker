@@ -1,0 +1,77 @@
+\usepackage[nohead, textwidth=16.5cm, textheight=23.5cm, ignorehead, paper=a4paper]{geometry}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage[french]{babel}
+\usepackage{hyperref}
+\usepackage{tikz}
+%\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage{tabulary}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{etoolbox}
+\usepackage{intcalc}
+\usepackage[absolute]{textpos}
+
+\input{inc/macro}
+
+\AtBeginDocument{\def\labelitemi{$\bullet$}}
+
+\setmainfont{Alegreya Sans}
+\setkomafont{disposition}{\normalfont}
+% \setcounter{tocdepth}{1}
+
+\renewcommand{\leftmark}{}
+\renewcommand{\rightmark}{}
+
+\hypersetup{
+    pdftitle={Passeport vacances Fribourg \pvfryear},
+    pdfauthor={Jacques Supcik},
+    bookmarks=true,
+}
+
+\begin{document}
+\frontmatter
+\begin{titlepage}
+\begin{center}
+{\fontsize{45}{40}\selectfont{}\pvfred{} Passeport vacances\\
+\vspace*{3mm}
+Fribourg/Freiburg \pvfryear}
+\vfill
+\includegraphics[width=.7\textwidth]{fig/logo.jpg}
+\vfill
+{\fontsize{32}{32}\selectfont{}du \pvfrstartfr{} au \pvfrendfr{} \pvfryear}\\
+\vspace*{3mm}
+{\fontsize{32}{32}\selectfont{}vom \pvfrstartde{} bis \pvfrendde{} \pvfryear}
+
+\end{center}
+\end{titlepage}
+\ifbare
+\else
+\clearpage
+\input{inc/front}
+\fi
+\cleardoublepage
+\tableofcontents
+\cleardoublepage
+
+\mainmatter
+
+\ifbare
+\else
+\part{Informations générales}
+\input{inc/intro}
+\input{inc/pub}
+\fi
+
+\part{Activités}
+\input{inc/activities}
+
+\ifbare
+\else
+\input{inc/back}
+\fi
+
+\end{document}
