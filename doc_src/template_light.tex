@@ -1,4 +1,4 @@
-% Copyright 2017 Jacques Supcik / Passeport Vacances Fribourg
+% Copyright 2016 Jacques Supcik / Passeport Vacances Fribourg
 %
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 \documentclass [parskip=full, paper=a4paper]{scrbook}
 \usepackage[nohead, textwidth=16.5cm, textheight=23.5cm, ignorehead, paper=a4paper]{geometry}
 \usepackage{fontspec}
+\usepackage{color}
 \usepackage{graphicx}
 \usepackage[french]{babel}
 \usepackage{hyperref}
@@ -40,7 +41,7 @@
 \renewcommand{\rightmark}{}
 
 \hypersetup{
-    pdftitle={Passeport vacances Fribourg 2017},
+    pdftitle={Passeport vacances Fribourg 2016},
     pdfauthor={Jacques Supcik},
     bookmarks=true,
 }
@@ -49,15 +50,24 @@
 \frontmatter
 \begin{titlepage}
 \begin{center}
-{\fontsize{45}{40}\selectfont{}40\ieme{} Passeport vacances\\
+{\fontsize{45}{40}\selectfont{}39\ieme{} Passeport vacances\\
 \vspace*{3mm}
-Fribourg/Freiburg 2017}
+Fribourg/Freiburg 2016}
 \vfill
-\includegraphics[width=.7\textwidth]{logo.jpg}
+\includegraphics[width=.55\textwidth]{logo.jpg}
 \vfill
-{\fontsize{32}{32}\selectfont{}du 10 juillet au 6 août 2017}\\
+
+{\fontsize{32}{32}\selectfont{}du 11 juillet au 7 août 2016}\\
 \vspace*{3mm}
-{\fontsize{32}{32}\selectfont{}vom 10. Juli bis 6. August 2017}
+{\fontsize{32}{32}\selectfont{}vom 11. Juli bis 7. August 2016}
+\vspace*{1cm}
+
+{
+\color{red}
+{\fontsize{32}{32}\selectfont{}Version «Light»}\\
+\vspace*{3mm}
+{\fontsize{24}{24}\selectfont{}Uniquement les activités sans inscription}
+}
 
 \end{center}
 \end{titlepage}
@@ -70,7 +80,7 @@ Fribourg/Freiburg 2017}
 \mainmatter
 
 \part{Informations générales}
-\input{intro}
+\input{intro_light}
 \input{pub}
 
 \part{Activités}

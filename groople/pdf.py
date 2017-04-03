@@ -53,7 +53,7 @@ def line_break(value):
     return value
 
 
-def make(data, params, doc_src, main_tex, templates):
+def make(categories, users, params, doc_src, main_tex, templates):
     logger.debug("Building template")
     cur_dir = os.getcwd()
     logger.debug("Current working directory : {0}".format(cur_dir))
@@ -82,7 +82,7 @@ def make(data, params, doc_src, main_tex, templates):
         logger.debug("{0} -> {1}".format(k, v))
         template = texenv.get_template(k)
         f = open(v, mode="w", encoding="utf-8")
-        f.write(template.render(data=data, params=params))
+        f.write(template.render(data=categories, users=users, params=params))
         f.close()
 
     logger.debug("compiling latex")

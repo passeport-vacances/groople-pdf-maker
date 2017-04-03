@@ -6,3 +6,14 @@ config.cfg
 temp
 venv
 __*
+bons_a_tirer.pdf
+groople_db.txt
+groople_telegram.txt
+grouple_web.txt
+test-docker.sh
+*.aux
+*.out
+*.toc
+doc_src/2016
+pvfr_bat.pdf
+pvfr.pdf
