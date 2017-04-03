@@ -44,9 +44,14 @@ parser.add_argument(
 
 parser.add_argument(
     "--debug", action="store_true",
-    default=os.getenv("GROOPLE_DEBUG", False),
     help="debug mode"
 )
+
+parser.add_argument(
+    "--no-cleanup", action="store_true",
+    help="do not remove temp directory"
+)
+
 
 args = parser.parse_args()
 
@@ -96,7 +101,10 @@ def gen_pdf(main_tex, **kwargs):
         doc_src="doc_src",
         main_tex=main_tex,
         templates={
-            "inc/activities_j2.tex": "inc/activities.tex"})
+            "inc/activities_j2.tex": "inc/activities.tex"
+        },
+        cleanup=not args.no_cleanup,
+    )
 
     return io.BufferedReader(io.BytesIO(pdfs))
 

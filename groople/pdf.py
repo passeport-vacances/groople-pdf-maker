@@ -53,7 +53,7 @@ def line_break(value):
     return value
 
 
-def make(categories, users, params, doc_src, main_tex, templates):
+def make(categories, users, params, doc_src, main_tex, templates, cleanup=True):
     logger.debug("Building template")
     cur_dir = os.getcwd()
     logger.debug("Current working directory : {0}".format(cur_dir))
@@ -122,6 +122,10 @@ def make(categories, users, params, doc_src, main_tex, templates):
     res = open(os.path.splitext(main_tex)[0] + ".pdf", "rb").read()
     os.chdir(cur_dir)
 
-    logger.debug("Cleaning up {0}".format(tmp_dir))
-    shutil.rmtree(tmp_dir)
+    if cleanup:
+        logger.debug("Cleaning up {0}".format(tmp_dir))
+        shutil.rmtree(tmp_dir)
+    else:
+        logger.debug("Keeping {0} for investigations".format(tmp_dir))
+
     return res
