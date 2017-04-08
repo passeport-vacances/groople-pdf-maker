@@ -17,9 +17,25 @@ class Slurper:
 
     @staticmethod
     def groupkey(x):
-        m = re.search(r'(\d+)\D+(\d+)', x['label'])
+        dows = {"lu": 1, "ma": 2, "me": 3, "je": 4, "ve": 5, "sa": 6, "di": 7}
+        periods = {"ma": 1, "am": 2, "pm": 3, "so": 4}
+
+        m = re.search(r'(\d+).*?([a-zA-Z]+).*?(\d+).*?([a-zA-Z]*).*?(\d*)', x['label'])
         if m:
-            return "{0:04d}{1:04d}".format(int(m.group(1)), int(m.group(2)))
+            week = int(m.group(1))
+            dow = m.group(2)
+            day = int(m.group(3))
+            per = m.group(4)
+            hour = int(m.group(5)) if m.group(5) != "" else 0
+            dn = dows.get(dow.lower(), 0)
+            if dn == 0:
+                logger.warning("Group {0} is not valid ({1} not found.".format(x['label'], dow))
+            pn = periods.get(per.lower(), 0)
+
+            key = "S{0:04d}.D{1:04d}.d{2:04d}.P{3:04d}.H{4:04d}".format(week, dn, day, pn, hour)
+            logger.debug(key)
+            return key
+
         else:
             return x['label']
 
